@@ -23,7 +23,8 @@ else
                     if unitInQ.altitude<60 and unitInQ.speed<5 then
                         numHeli=numHeli+1
                     end
-                else if unitInQ.type=="Boat" then
+                end
+                if unitInQ.type=="Boat" then
                     numBoat=numBoat+1
                 end
             end
@@ -41,13 +42,13 @@ else
         end
         if ScenEdit_MsgBox(message,4) == "Yes" then
             if(numHeli>0 or numBoat>0) then
-               local x=numHeli+numBoats*2-1
+               local x=numHeli+numBoat*2-1
                local p=1/(1+math.exp(-x))
                if(math.random()<p) then
-                ScenEdit_SetUnitSide({side=myUnit.side,name=myUnit.name,newside=ScenEdit.GetPlayerSide()})
-                ScenEdit_MsgBox("Sucessful Boarding")
+                ScenEdit_SetUnitSide({side=myUnit.side,name=myUnit.name,newside=ScenEdit_PlayerSide()})
+                ScenEdit_MsgBox("Sucessful Boarding",6)
                else
-                ScenEdit_MsgBox("Boarding Failed")
+                ScenEdit_MsgBox("Boarding Failed",6)
                end
             end
         end
